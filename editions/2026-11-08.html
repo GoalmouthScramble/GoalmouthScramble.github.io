@@ -1,0 +1,1186 @@
+<!doctype html>
+<html lang="en-GB">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Isthmian Premier News</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: matchday programme meets weekend supplement. Floodlit-pitch green as the one loud colour, scoreboard numerals, club-colour chips as the confetti. */
+:root{
+  --paper:#f4f6f1;
+  --card:#ffffff;
+  --ink:#14191a;
+  --muted:#5b6662;
+  --rule:#d5dbd4;
+  --pitch:#0d6b3a;
+  --pitch-ink:#ffffff;
+  --pitch-soft:#e2efe6;
+  --yellow:#f3c316;
+  --red:#d42a2a;
+  --up:#1f9a54;
+  --down:#d23b35;
+  --zone-up:#d3ecdc;
+  --zone-po:#eef4e0;
+  --zone-down:#f7e1df;
+  --display:"Big Shoulders Display","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --body:"Newsreader",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#111615;--card:#182020;--ink:#eef2ee;--muted:#9fb0a8;--rule:#2b3634;
+  --pitch:#2fa765;--pitch-ink:#08130d;--pitch-soft:#173226;--yellow:#f3c316;--red:#ff5a52;
+  --up:#3cc87a;--down:#ff6b63;
+  --zone-up:#17352a;--zone-po:#26301a;--zone-down:#3a1f1d;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#111615;--card:#182020;--ink:#eef2ee;--muted:#9fb0a8;--rule:#2b3634;
+  --pitch:#2fa765;--pitch-ink:#08130d;--pitch-soft:#173226;--yellow:#f3c316;--red:#ff5a52;
+  --up:#3cc87a;--down:#ff6b63;
+  --zone-up:#17352a;--zone-po:#26301a;--zone-down:#3a1f1d;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.5;margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:.95;letter-spacing:.01em}
+p{margin:0}
+a{color:inherit}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+.pos{font-family:var(--mono);font-size:.74em;color:var(--muted);font-weight:400;white-space:nowrap;letter-spacing:.02em;text-transform:none}
+
+/* masthead */
+.mast{border-bottom:6px solid var(--ink);padding-block:22px 14px}
+.mast-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.mast h1{font-size:clamp(30px,8.6vw,108px);font-weight:900;text-transform:uppercase;letter-spacing:-.01em;margin-top:6px;white-space:nowrap}
+.mast h1 span{color:var(--pitch)}
+.strap{display:flex;justify-content:space-between;gap:10px 24px;flex-wrap:wrap;border-top:1px solid var(--ink);margin-top:10px;padding-top:8px}
+.mast-top .label,.strap .label{white-space:nowrap}
+@media(max-width:359px){.mast-top .label,.strap .label{font-size:11px;letter-spacing:.05em}}
+.ai-note{font-style:italic;color:var(--muted);font-size:15px}
+
+/* sections */
+section{padding-block:34px;border-bottom:1px solid var(--rule)}
+.sec-head{margin-bottom:18px}
+.sec-head h2,h2.sec{font-size:clamp(34px,5vw,52px);font-weight:900;text-transform:uppercase}
+.grid{display:grid;gap:28px}
+@media(min-width:900px){.g-2{grid-template-columns:1fr 1fr}.g-table{grid-template-columns:1.45fr 1fr}}
+.grid>*{min-width:0}
+
+/* front page: top story, round-up, results */
+.front{display:grid;gap:28px;grid-template-areas:"story" "glance" "round"}
+.front>*{min-width:0}
+.f-story{grid-area:story}.f-round{grid-area:round}.f-glance{grid-area:glance}
+@media(min-width:760px){.front{grid-template-columns:1fr 1fr;grid-template-areas:"story round" "glance glance"}}
+@media(min-width:1100px){.front{grid-template-columns:minmax(0,1fr) minmax(0,1fr) fit-content(360px);grid-template-areas:"story round glance"}}
+.front h2{font-size:clamp(32px,3.6vw,46px);font-weight:900;text-transform:uppercase}
+.front .kicker{display:block;font-family:var(--display);font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:.04em;color:var(--pitch);margin-bottom:8px}
+.front .body{display:grid;gap:12px;margin-top:12px;font-size:17px}
+.f-round{border-left:1px solid var(--rule);padding-left:28px}
+@media(max-width:759px){.f-round{border-left:none;padding-left:0;border-top:1px solid var(--rule);padding-top:24px}}
+.minis{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:4px 22px;margin-top:16px}
+.minis b{display:block;font-family:var(--display);font-weight:900;font-size:34px;line-height:1;color:var(--pitch)}
+.minis span{font-family:var(--mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+@media(max-width:420px){.minis{grid-template-columns:repeat(2,auto)}}
+
+.glance{font-size:15px;line-height:1.3}
+.glance h3{font-size:22px;font-weight:900;text-transform:uppercase;border-bottom:2px solid var(--ink);padding-bottom:4px;margin-bottom:4px}
+.glance .day{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:8px;display:block}
+.glance ul{list-style:none;margin:0;padding:0}
+.glance li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:3px 0;border-bottom:1px dotted var(--rule)}
+.glance li span{min-width:0}
+.glance li b{font-variant-numeric:tabular-nums;font-weight:600}
+@media(min-width:760px) and (max-width:1099px){.glance ul{columns:2;column-gap:28px}.glance li{break-inside:avoid}}
+
+/* club chips */
+.chip{display:inline-block;width:14px;height:14px;border-radius:50%;flex:none;border:1px solid rgba(0,0,0,.25);background:linear-gradient(90deg,var(--c1) 50%,var(--c2) 50%)}
+
+/* good bad crazy */
+.gbc{display:grid;gap:14px}
+@media(min-width:800px){.gbc{grid-template-columns:repeat(3,1fr)}}
+.gbc article{background:var(--card);border:1px solid var(--rule);border-top:8px solid var(--tone);padding:16px;display:grid;gap:8px;align-content:start}
+.gbc .tag{font-family:var(--display);font-weight:900;font-size:30px;text-transform:uppercase;color:var(--tone)}
+.gbc h3{font-size:26px;font-weight:800;text-transform:uppercase}
+.gbc p{font-size:16px}
+.gbc .club{font-family:var(--display);font-weight:800;font-size:19px;text-transform:uppercase;color:var(--muted);line-height:1;margin-top:-4px}
+
+/* results */
+.results{display:grid;gap:12px}
+@media(min-width:700px){.results{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1050px){.results{grid-template-columns:repeat(3,1fr)}}
+.res{background:var(--card);border:1px solid var(--rule);padding:14px;display:grid;gap:8px;position:relative;overflow:hidden;align-content:start}
+.res::before{content:"";position:absolute;inset:0 auto 0 0;width:5px;background:linear-gradient(var(--h1) 50%,var(--a1) 50%)}
+.score{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;font-family:var(--display);font-weight:800;font-size:24px;text-transform:uppercase;line-height:1.05;padding-left:6px}
+.score .g{font-size:34px;font-weight:900;text-align:right}
+.score .win{color:var(--pitch)}
+.res p{font-size:16px;line-height:1.4;padding-left:6px}
+.res .meta{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;padding-left:6px}
+
+/* table */
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:right;padding:6px 6px;border-bottom:2px solid var(--ink)}
+th:nth-child(3),td:nth-child(3){text-align:left}
+td{padding:6px;text-align:right;border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums;white-space:nowrap;vertical-align:middle;height:34px}
+td.team{font-weight:600}
+td.team .tm{display:inline-flex;gap:8px;align-items:center;vertical-align:middle}
+td.team small{font-weight:400;color:var(--muted);font-size:13px}
+td.pts{font-family:var(--display);font-weight:900;font-size:20px}
+td.mv{font-family:var(--mono);font-size:14px;font-weight:600;width:44px}
+.mv-up{color:var(--up)}.mv-down{color:var(--down)}.mv-same{color:var(--muted)}
+tr.z-up td{background:var(--zone-up)}
+tr.z-po td{background:var(--zone-po)}
+tr.z-down td{background:var(--zone-down)}
+tr.z-up td:first-child{box-shadow:inset 4px 0 0 var(--up)}
+tr.z-po td:first-child{box-shadow:inset 4px 0 0 #9cc56b}
+tr.z-down td:first-child{box-shadow:inset 4px 0 0 var(--down)}
+.form{display:inline-flex;gap:3px}
+.form i{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;font-style:normal;font-family:var(--mono);font-size:10px;font-weight:600;color:#fff}
+.form .W{background:#1f9a54}.form .D{background:#9aa39e}.form .L{background:#d23b35}
+.key{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase}
+.key span{display:inline-flex;gap:6px;align-items:center}
+.key b{width:12px;height:12px;display:inline-block;border:1px solid var(--rule)}
+
+/* side notes */
+.note{background:var(--card);border:1px solid var(--rule);padding:16px;display:grid;gap:10px}
+.note h3{font-size:28px;font-weight:800;text-transform:uppercase}
+.note p{font-size:16px}
+.stack{display:grid;gap:22px;align-content:start}
+.stack h2{font-size:34px;font-weight:900;text-transform:uppercase;margin-bottom:10px}
+
+/* movers + streaks */
+.mlist{display:grid;gap:8px}
+.mrow{display:grid;grid-template-columns:62px minmax(0,1fr);gap:12px;align-items:center;background:var(--card);border:1px solid var(--rule);padding:10px 12px}
+.mrow .d{font-family:var(--display);font-weight:900;font-size:34px;line-height:1;text-align:center}
+.mrow b{font-weight:600}
+.mrow p{font-size:15.5px;line-height:1.35}
+.streak{display:grid;grid-template-columns:62px minmax(0,1fr);gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--rule)}
+.streak .n{font-family:var(--display);font-weight:900;font-size:44px;line-height:1;color:var(--pitch);text-align:center}
+.streak .n.bad{color:var(--down)}
+.streak p{font-size:15.5px;line-height:1.35}
+
+/* bars */
+.bars{display:grid;gap:5px}
+.bar{display:grid;grid-template-columns:26px minmax(0,1.3fr) minmax(0,2fr) 44px;gap:8px;align-items:center;font-size:15px}
+.bar .rk{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right}
+.bar .who{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;gap:6px;align-items:center}
+.bar .who small{color:var(--muted);font-size:13px}
+.bar .gb-who{display:grid;gap:1px;line-height:1.15;padding-block:3px}
+.gb-who span,.gb-who small{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .track{height:16px;background:var(--pitch-soft);position:relative}
+.bar .fill{position:absolute;inset:0 auto 0 0;background:var(--c1)}
+.bar .v{font-family:var(--display);font-weight:900;font-size:20px;text-align:right;line-height:1}
+.bar .mpg{font-family:var(--mono);font-size:10px;color:var(--muted);font-weight:400}
+.gb-head{display:grid;grid-template-columns:26px minmax(0,1.3fr) minmax(0,2fr) 44px;gap:8px;font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding-bottom:4px;border-bottom:2px solid var(--ink);margin-bottom:4px}
+@media(max-width:560px){.bar,.gb-head{grid-template-columns:22px minmax(0,1.7fr) minmax(0,1fr) 40px}}
+.att .bar{grid-template-columns:minmax(0,1.7fr) minmax(0,1.6fr) 50px}
+@media(max-width:560px){.att .bar{grid-template-columns:minmax(0,1fr) 60px 46px}}
+.statbox{background:var(--card);border:2px solid var(--ink);padding:16px;display:grid;gap:6px}
+.statbox b{font-family:var(--display);font-weight:900;font-size:64px;line-height:.9;color:var(--pitch)}
+.statbox p{font-size:16px}
+
+/* quote of the week */
+.qotw{margin:0;display:grid;gap:14px;max-width:900px}
+.qotw q{font-family:var(--display);font-weight:800;font-size:clamp(28px,3.6vw,42px);line-height:1.05;quotes:"\201C" "\201D";color:var(--pitch)}
+.qotw q::before,.qotw q::after{color:var(--ink)}
+.qotw footer{font-size:17px;color:var(--muted)}
+.qotw footer b{color:var(--ink)}
+
+/* odd ones */
+.odd{display:grid;gap:14px}
+@media(min-width:700px){.odd{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1050px){.odd{grid-template-columns:repeat(3,1fr)}}
+.odd article{border-top:4px solid var(--ink);padding-top:10px;display:grid;gap:6px;align-content:start}
+.odd h3{font-size:26px;font-weight:800;text-transform:uppercase}
+.odd p{font-size:16px}
+
+/* cards */
+.cards{display:grid;gap:10px}
+.card-row{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;background:var(--card);border:1px solid var(--rule);padding:12px}
+.rc{width:16px;height:22px;border-radius:2px;background:var(--red);margin-top:3px}
+.rc.y2{background:linear-gradient(135deg,var(--yellow) 50%,var(--red) 50%)}
+.card-row p{font-size:16px}
+.card-row b{font-family:var(--display);font-weight:800;font-size:20px;text-transform:uppercase}
+
+/* transfers */
+.moves{display:grid;gap:12px}
+@media(min-width:760px){.moves{grid-template-columns:1fr 1fr}}
+@media(min-width:1100px){.moves{grid-template-columns:repeat(3,1fr)}}
+.move{display:grid;grid-template-columns:auto 1fr;gap:12px;background:var(--card);border:1px solid var(--rule);padding:12px;align-items:start}
+.move .dir{font-family:var(--mono);font-size:11px;font-weight:600;padding:3px 6px;letter-spacing:.06em;background:var(--pitch);color:var(--pitch-ink)}
+.move .dir.out{background:var(--muted);color:var(--paper)}
+.move h3{font-size:22px;font-weight:800;text-transform:uppercase}
+.move p{font-size:15.5px}
+
+/* fixtures */
+.fx-h{font-size:26px;font-weight:800;text-transform:uppercase;margin:22px 0 10px}
+.fx-h:first-of-type{margin-top:0}
+.score.fxs{grid-template-columns:1fr}
+.fx-day{display:grid;gap:8px;align-content:start}
+.fx-day h3{font-size:26px;font-weight:800;text-transform:uppercase;margin-top:6px}
+.fx{background:var(--card);border:1px solid var(--rule);padding:10px 12px;display:grid;gap:4px}
+.fx .teams{display:grid;grid-template-columns:minmax(0,1fr) 52px minmax(0,1fr);gap:10px;align-items:baseline;font-size:16px;font-weight:600}
+.fx .teams .h{text-align:right}
+.fx .teams .t{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--muted);text-align:center}
+.fx .why{font-size:15px;color:var(--muted);font-style:italic;text-align:center}
+
+/* footer */
+footer.site{padding-block:30px 60px;display:grid;gap:22px}
+details{background:var(--card);border:1px solid var(--rule);padding:12px 14px}
+summary{cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+details ol{font-size:14px;line-height:1.45;padding-left:22px;margin:12px 0 0;display:grid;gap:4px}
+.archive{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.archive .issue{border:2px solid var(--ink);padding:6px 10px;font-family:var(--mono);font-size:12px;text-transform:uppercase}
+.archive .issue.now{background:var(--ink);color:var(--paper)}
+
+:focus-visible{outline:3px solid var(--pitch);outline-offset:2px}
+</style>
+
+
+<header class="mast wrap">
+  <div class="mast-top">
+    <span class="label">Issue 2 · Sunday 8 November 2026</span>
+  </div>
+  <h1>Isthmian <span>Premier</span> News</h1>
+  <div class="strap">
+    <span class="label">Twice a week · By Goalmouth Scramble Media</span>
+  </div>
+</header>
+
+<main>
+
+<!-- FRONT PAGE -->
+<section class="wrap">
+  <div class="front">
+
+    <article class="f-round">
+      <span class="kicker">Weekend round-up</span>
+      <h2>Welling go top</h2>
+      <div class="body">
+        <p>Welling United <span class="pos">(1st)</span> won 3-1 at St Albans City <span class="pos">(8th)</span>, and with Enfield Town <span class="pos">(2nd)</span> losing at home to AFC Whyteleafe <span class="pos">(13th)</span>, they go top by two points. Enfield have a game in hand, however, and they host Lewes <span class="pos">(4th)</span> on Tuesday. Eastbourne's defeat at Dartford means just six points now cover the top five, with Lewes and Dartford level on 30 after both won.</p>
+        <p>Further down, Carshalton Athletic <span class="pos">(7th)</span> won for the first time in seven league games and moved into the play-off places, which pushed St Albans out of them after a second defeat in five days. At the bottom, Brentwood Town <span class="pos">(18th)</span> climbed out of the relegation zone with a point at Three Bridges <span class="pos">(20th)</span>. That dropped Cray Wanderers <span class="pos">(19th)</span> into it without kicking a ball, although they have played five games fewer than Brentwood.</p>
+      </div>
+      <div class="minis">
+        <div><b class="num">34</b><span>goals in ten games</span></div>
+        <div><b class="num">4</b><span>away wins</span></div>
+        <div><b class="num">6</b><span>pts, 1st to 5th</span></div>
+        <div><b class="num">3,092</b><span>at Champion Hill</span></div>
+      </div>
+    </article>
+
+    <aside class="f-glance glance" aria-label="Results at a glance">
+      <h3>Results</h3>
+      <span class="day">Saturday 7 November</span>
+      <ul>
+        <li><span>Carshalton Athletic v Cheshunt</span><b>4-2</b></li>
+        <li><span>Chatham Town v Burgess Hill Town</span><b>1-1</b></li>
+        <li><span>Dartford v Eastbourne Borough</span><b>4-1</b></li>
+        <li><span>Dulwich Hamlet v Lewes</span><b>2-3</b></li>
+        <li><span>Enfield Town v AFC Whyteleafe</span><b>0-2</b></li>
+        <li><span>Ramsgate v Aveley</span><b>4-0</b></li>
+        <li><span>St Albans City v Welling United</span><b>1-3</b></li>
+        <li><span>Stanway Rovers v Whitehawk</span><b>0-0</b></li>
+        <li><span>Three Bridges v Brentwood Town</span><b>1-1</b></li>
+        <li><span>Wingate &amp; Finchley v Maldon &amp; Tiptree</span><b>1-3</b></li>
+      </ul>
+    </aside>
+
+    <article class="f-story">
+      <span class="kicker">Top story</span>
+      <h2>Steve King's unhappy return to Dartford</h2>
+      <div class="body">
+        <p>On Friday, Steve King was named the division's Manager of the Month for October, after his Eastbourne Borough <span class="pos">(3rd)</span> side won all five of their league games. On Saturday he took them back to Dartford <span class="pos">(5th)</span>, the club he used to manage, where he won the Kent Senior Cup twice and reached a National South play-off final.</p>
+        <p>By half-time his side were 4-0 down, and although they pulled one back after the break, they lost 4-1. It ended Eastbourne's run of eight straight league wins, at the ground where King's Dartford teams once lost only seven of 44 home league games.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- GOOD WEEK BAD WEEK CRAZY WEEK -->
+<section class="wrap" id="gbc">
+  <div class="sec-head"><h2>Good week, bad week, crazy week</h2></div>
+  <div class="gbc">
+    <article style="--tone:var(--up)">
+      <span class="tag">Good week</span>
+      <h3>Slavomir Huk <span class="pos">(GK)</span></h3>
+      <span class="club">AFC Whyteleafe <span class="pos">(13th)</span></span>
+      <p>Enfield Town had scored ten goals in their previous two league games, and they were top of the table when Whyteleafe visited on Saturday. With his side 1-0 up, the Slovak kept out Sam Youngs's 57th-minute penalty, his second penalty save in a week and, by the club's count, his fourth of the season. Whyteleafe then scored again late on, knocked the leaders off the top, and named Huk their man of the match.</p>
+    </article>
+    <article style="--tone:var(--down)">
+      <span class="tag">Bad week</span>
+      <h3>Sam Youngs <span class="pos">(FWD)</span></h3>
+      <span class="club">Enfield Town <span class="pos">(2nd)</span></span>
+      <p>Enfield's usually reliable penalty taker had the chance to equalise against AFC Whyteleafe <span class="pos">(13th)</span> after 57 minutes, only to see Huk save his spot kick. He was substituted five minutes later, and Whyteleafe went on to add a second eight minutes from time. As a result, Enfield lost a league game for the first time since mid-September, and with it top spot.</p>
+    </article>
+    <article style="--tone:#c77d00">
+      <span class="tag">Crazy week</span>
+      <h3>Liam Nash</h3>
+      <span class="club">Eastbourne Borough <span class="pos">(3rd)</span></span>
+      <p>He scored five goals in 11 games for Dartford <span class="pos">(5th)</span>, and he has been out for much of this season with a fractured shoulder. On Saturday he came off the bench at his old club with his side already 4-0 down, and within a minute he had scored. It was the only good news Eastbourne had all afternoon.</p>
+    </article>
+  </div>
+</section>
+
+<!-- TABLE -->
+<section class="wrap" id="table">
+  <div class="sec-head"><h2>The table</h2></div>
+  <div class="grid g-table">
+    <div>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>#</th><th></th><th>Club</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th><th>Form</th></tr></thead>
+          <tbody id="tbl"></tbody>
+        </table>
+      </div>
+      <div class="key">
+        <span><b class="ln"></b>Automatic promotion</span>
+        <span><b class="ln dot"></b>Play-offs (2nd–7th)</span>
+        <span><b class="ln rel"></b>Relegation (19th–22nd)</span>
+        <span>▲▼ places moved since the last issue</span>
+        <span>Form: oldest to newest</span>
+      </div>
+    </div>
+    <div class="stack">
+      <div>
+        <h2>Biggest movers</h2>
+        <div class="mlist">
+          <div class="mrow"><span class="d mv-up">▲2</span><p><b>Carshalton Athletic</b> <span class="pos">(7th)</span>. 9th to 7th and into the play-off places, after a first league win in seven, which substitute Jacob Safa made safe eight minutes into stoppage time.</p></div>
+          <div class="mrow"><span class="d mv-up">▲2</span><p><b>AFC Whyteleafe</b> <span class="pos">(13th)</span>. 15th to 13th after winning at the leaders. Chatham Town <span class="pos">(9th)</span> and Burgess Hill Town <span class="pos">(11th)</span> also climbed two places after drawing with each other.</p></div>
+          <div class="mrow"><span class="d mv-down">▼2</span><p><b>St Albans City</b> <span class="pos">(8th)</span>. 6th to 8th, and out of the play-off places, after defeats at Aveley and then at home to Welling within five days. Wingate &amp; Finchley <span class="pos">(10th)</span> and Dulwich Hamlet <span class="pos">(14th)</span> also fell two places after home defeats, and so did Leatherhead <span class="pos">(12th)</span>, who had the weekend off.</p></div>
+        </div>
+      </div>
+      <div>
+        <h2>Current streaks</h2>
+        <div class="streak"><span class="n">3</span><p><b>Winning and unbeaten:</b> Welling United <span class="pos">(1st)</span> have won three league games in a row, against Leatherhead, Carshalton and St Albans. That is now the longest run in the division, because Eastbourne Borough's <span class="pos">(3rd)</span> eight straight wins and Enfield Town's <span class="pos">(2nd)</span> unbeaten run since mid-September both ended on Saturday.</p></div>
+        <div class="streak"><span class="n bad">5</span><p><b>Winless:</b> Three Bridges <span class="pos">(20th)</span> have gone five league games without a win, while Whitehawk <span class="pos">(22nd)</span> have won only once all season.</p></div>
+        <div class="streak"><span class="n">9</span><p><b>Home:</b> Welling have won all nine of their league games at home. Their next one is against Three Bridges on Saturday.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATCH REPORTS -->
+<section class="wrap" id="reports">
+  <div class="sec-head"><h2>Match reports</h2></div>
+  <div class="results">
+
+    <article class="res" style="--h1:#111;--a1:#c8102e">
+      <div class="score"><span class="win">Dartford <span class="pos">(5th)</span></span><span class="g num win">4</span><span>Eastbourne Borough <span class="pos">(3rd)</span></span><span class="g num">1</span></div>
+      <p>Eastbourne's keeper Louis Carey made a save on the line within seconds of kick-off, and Dartford barely let up all half. Dan Smith <span class="pos">(FWD)</span> finished superbly after 15 minutes, his back-heel set Max Fiddes <span class="pos">(FWD)</span> clear for the second, player-manager Ben Greenhalgh <span class="pos">(CM)</span> drove the third into the bottom corner and Fiddes raced through again for the fourth in stoppage time. Liam Nash pulled one back a minute after coming on, and Kai Corbett's free kick clipped the bar, but Carey was still making saves at the end as the fog rolled in.</p>
+      <span class="meta">Att 1,108 · <b>Dartford:</b> Smith 15, Fiddes 26, 45+3, Greenhalgh 34 · <b>Eastbourne:</b> Nash 72</span>
+    </article>
+
+    <article class="res" style="--h1:#1f4e9c;--a1:#127a3a">
+      <div class="score"><span>Enfield Town <span class="pos">(2nd)</span></span><span class="g num">0</span><span class="win">AFC Whyteleafe <span class="pos">(13th)</span></span><span class="g num win">2</span></div>
+      <p>Whyteleafe barely got out of their own half for the first 15 minutes. Soon after, Palace Francis forced a fine one-handed save from Dylan Thompson, and three minutes later he was left unmarked and fired across goal into the far corner. Enfield's best chance to level came from the penalty spot after 57 minutes, and Huk saved it. Then, eight minutes from time, Toby Aromolaran broke clear from just inside the Enfield half, held off two defenders and drilled in his 13th league goal of the season.</p>
+      <span class="meta">Att 653 · <b>Whyteleafe:</b> Francis 19, Aromolaran 84</span>
+    </article>
+
+    <article class="res" style="--h1:#ec6fa8;--a1:#d71920">
+      <div class="score"><span>Dulwich Hamlet <span class="pos">(14th)</span></span><span class="g num">2</span><span class="win">Lewes <span class="pos">(4th)</span></span><span class="g num win">3</span></div>
+      <p>A crowd of 3,092 turned up for Dulwich's annual Remembrance fixture, and against the run of play Danny Mills, on his 300th appearance for the club, followed up a blocked shot to put them ahead just before half-time. However, Lewes brought on Bobby Unwin at the break and turned it round. Kurtis Cumberbatch whipped in Charlie Walker's low cross from a short corner, captain Josh Spinks rose highest at the back post to head them in front, and Unwin cut inside onto his right foot to place a third past Hudson Sands. Lonit Talla's stoppage-time goal for Dulwich came too late, and Lewes manager Craig Nelson called the travelling fans their "12th man".</p>
+      <span class="meta">Att 3,092 · <b>Dulwich:</b> Mills 43, Talla 90+1 · <b>Lewes:</b> Cumberbatch 53, Spinks 64, Unwin 82</span>
+    </article>
+
+    <article class="res" style="--h1:#1a3e8c;--a1:#c8102e">
+      <div class="score"><span>St Albans City <span class="pos">(8th)</span></span><span class="g num">1</span><span class="win">Welling United <span class="pos">(1st)</span></span><span class="g num win">3</span></div>
+      <p>All four of Welling's league defeats this season had come away from home, but they led here a minute before half-time through Kaan Bennett. Zane Banton levelled from the penalty spot six minutes after the break, only for Fumnaya Shomotun to restore the lead on the hour, and Bennett's second sealed it. Micah Anthony then hit the post from a tight angle, and St Albans' biggest home crowd of the season watched Welling go top.</p>
+      <span class="meta">Att 1,244 · <b>St Albans:</b> Banton 51 (pen) · <b>Welling:</b> Bennett 44, 67, Shomotun 61</span>
+    </article>
+
+    <article class="res" style="--h1:#c8102e;--a1:#1c4fa1">
+      <div class="score"><span class="win">Ramsgate <span class="pos">(6th)</span></span><span class="g num win">4</span><span>Aveley <span class="pos">(15th)</span></span><span class="g num">0</span></div>
+      <p>Billy Munday scored inside two minutes and Rowan Liburd doubled the lead after a quarter of an hour, which was a quick response to Tuesday's 3-0 cup defeat at Sheppey United. With 13 minutes left, Alfie Paxman beat a man in midfield and struck low and hard into the bottom corner from 25 yards. Then substitute Latrell Lewis, booked five minutes earlier, cut inside and sent a shot from 20 yards into the top corner.</p>
+      <span class="meta">Att 1,444 · <b>Ramsgate:</b> Munday 2, Liburd 15, Paxman 77, Lewis 90</span>
+    </article>
+
+    <article class="res" style="--h1:#7a1f2b;--a1:#f29f05">
+      <div class="score"><span class="win">Carshalton Athletic <span class="pos">(7th)</span></span><span class="g num win">4</span><span>Cheshunt <span class="pos">(17th)</span></span><span class="g num">2</span></div>
+      <p>Back home after five games on the road, Carshalton went ahead when Nathan Young-Coombes laid the ball off for Tyler Hayles to fire home, and Nico Jones headed in Saraiva's corner in first-half stoppage time. Tommy Wood, on at half-time, pulled one back for Cheshunt straight after the restart following a mix-up at the back, but Chris Regis smashed in a third from just outside the box. Cheshunt then lost their keeper R'avan Constable to injury and had to put a defender in goal. Even so, Obi Onyeagwara made it 3-2, before Jacob Safa came off the bench to settle it eight minutes into stoppage time.</p>
+      <span class="meta">Att 448 · <b>Carshalton:</b> Hayles 14, Jones 45+1, Regis 49, Safa 90+8 · <b>Cheshunt:</b> Wood 46, Onyeagwara 76</span>
+    </article>
+
+    <article class="res" style="--h1:#1b3f94;--a1:#2456a8">
+      <div class="score"><span>Wingate &amp; Finchley <span class="pos">(10th)</span></span><span class="g num">1</span><span class="win">Maldon &amp; Tiptree <span class="pos">(16th)</span></span><span class="g num win">3</span></div>
+      <p>David Oupoh struck hard into the bottom corner after a scramble to put Wingate ahead, but within seven minutes Maldon led, through Rhamar Garrett-Douglas, against his old club, and Jamie Bennett. Wingate then had a penalty to level after Loic Hernandez was fouled, only for the Maldon keeper to save Botti's spot kick. Evans Kouassi made no mistake with Maldon's penalty in the second half, and it ended Wingate's five-game unbeaten run in a game with seven bookings. Maldon have now won two in a row.</p>
+      <span class="meta">Att 192 · <b>Wingate:</b> Oupoh 21 · <b>Maldon:</b> Garrett-Douglas 24, Bennett 28, Kouassi 73 (pen)</span>
+    </article>
+
+    <article class="res" style="--h1:#c8102e;--a1:#f4c400">
+      <div class="score"><span>Chatham Town <span class="pos">(9th)</span></span><span class="g num">1</span><span>Burgess Hill Town <span class="pos">(11th)</span></span><span class="g num">1</span></div>
+      <p>Burgess Hill had three players booked inside the first 35 minutes, and their own live commentary was scathing about the referee. Then, just before half-time, Ben Allen's long-range shot looped up and over keeper Roco Rees for Chatham's first effort on target. Two minutes into the second half, Hill won their first free kick of the game, Yoan Edoukou clipped it in, and Jack Strange, left unmarked, thundered in a header. It was Hill's second draw in five days, while Chatham have now gone three league games without a win.</p>
+      <span class="meta">Att 1,008 · <b>Chatham:</b> Allen 41 · <b>Burgess Hill:</b> Strange 47</span>
+    </article>
+
+    <article class="res" style="--h1:#f0a500;--a1:#6cb4e4">
+      <div class="score"><span>Three Bridges <span class="pos">(20th)</span></span><span class="g num">1</span><span>Brentwood Town <span class="pos">(18th)</span></span><span class="g num">1</span></div>
+      <p>Ade Adeyinka gave Three Bridges an early lead, but just before the hour Harry Gibbs met a free kick and slotted it into the bottom corner. After that, Bridges keeper Sam Roberts, their player of the match, kept out a curling free kick and a one-on-one. Deep into stoppage time Matt Cripps was shown a red card for handball, but Brentwood held on, and the point was enough to lift them out of the relegation places.</p>
+      <span class="meta">Att 278 · <b>Three Bridges:</b> Adeyinka 12 · <b>Brentwood:</b> Gibbs 58</span>
+    </article>
+
+    <article class="res" style="--h1:#e2a800;--a1:#c8102e">
+      <div class="score"><span>Stanway Rovers <span class="pos">(21st)</span></span><span class="g num">0</span><span>Whitehawk <span class="pos">(22nd)</span></span><span class="g num">0</span></div>
+      <p>The bottom two met in front of 109, the smallest crowd of the day, and neither side could find a goal, with only one booking all afternoon. Whitehawk stay a point behind Stanway, and the pair remain two and three points behind Three Bridges respectively.</p>
+      <span class="meta">Att 109</span>
+    </article>
+
+  </div>
+
+  <h3 class="fx-h">Sunday 8 November · FA Cup first round</h3>
+  <div class="results">
+    <article class="res" style="--h1:#f0a500;--a1:#0059a8">
+      <div class="score"><span>Cray Wanderers <span class="pos">(19th)</span></span><span class="g num">2</span><span class="win">Stockport County</span><span class="g num win">3</span></div>
+      <p>Sammie McLeod ran on to Ola Ogunwamide's pass to put Cray ahead after 21 minutes. Ten minutes later Stockport keeper Luca Ashby-Hammond came off his line, crashed into a Cray player and was sent off, and Alex Hernandez curled the free kick straight in. Cray were still 2-0 up with nine minutes left, but Kyle Wootton headed in from close range and Mikaël Mandron headed an equaliser in stoppage time. Then, in extra time, Cray keeper JJ Briggs brought down Mandron, and Lewis Fiorini put the penalty into the bottom corner.</p>
+      <span class="meta">After extra time · <b>Cray:</b> McLeod 21, Hernandez 36 · <b>Stockport:</b> Wootton 81, Mandron 90+1, Fiorini 101 (pen)</span>
+    </article>
+  </div>
+</section>
+
+<!-- GOLDEN BOOT -->
+<section class="wrap" id="golden-boot">
+  <div class="sec-head"><h2>Golden Boot</h2></div>
+  <div class="grid g-table">
+    <div>
+      <div class="gb-head"><span>#</span><span>Player</span><span>Goals · mins per goal</span><span></span></div>
+      <div class="bars" id="gb"></div>
+    </div>
+    <div class="stack">
+      <div class="note">
+        <h3>Thirteen</h3>
+        <p>Toby Aromolaran's goal at Enfield Town <span class="pos">(2nd)</span> was his 13th of the league season, and it came after he broke clear from just inside the Enfield half and held off two defenders. He is now four clear of Ramsgate's <span class="pos">(6th)</span> Callum Jones, and he scores one every 81 minutes for AFC Whyteleafe <span class="pos">(13th)</span>.</p>
+      </div>
+      <div class="note">
+        <h3>Three for three</h3>
+        <p>Dartford's <span class="pos">(5th)</span> Fiddes <span class="pos">(FWD)</span>, Smith <span class="pos">(FWD)</span> and Greenhalgh <span class="pos">(CM)</span> all scored against Eastbourne. Fiddes, with two, is up to eight, and Greenhalgh joins the other two in the top 20. Ramsgate also have three players in the list, after Billy Munday and Alfie Paxman both scored in the 4-0 win over Aveley <span class="pos">(15th)</span>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOP QUOTE -->
+<section class="wrap" id="quote">
+  <div class="sec-head"><h2>Top quote</h2></div>
+  <blockquote class="qotw">
+    <q>You may find a Cray Wanderers flag hanging from one of the floodlights</q>
+    <footer><b>Gary Hillman, Cray Wanderers <span class="pos">(19th)</span> chairman</b>, in his programme notes for today's FA Cup tie with Stockport County. A Crystal Palace fan, he was pointing readers to the highlights of the day in 2001 when Palace won 4-2 at Stockport to stay up.</footer>
+  </blockquote>
+</section>
+
+<!-- IN OTHER NEWS -->
+<section class="wrap" id="odd">
+  <div class="sec-head"><h2>In other news</h2></div>
+  <div class="odd">
+    <article>
+      <h3>Nine minutes from history</h3>
+      <p>After 78 FA Cup campaigns, Cray Wanderers <span class="pos">(19th)</span> finally reached the first round proper on Sunday, as the Isthmian League's last club in the competition. All 2,500 tickets sold out in ten minutes, a new stand was finished in time for the game, and the BBC cameras were there for the first time. With nine minutes left they led League One's Stockport County 2-0 against ten men, only to lose 3-2 after extra time.</p>
+    </article>
+    <article>
+      <h3>Off on international duty</h3>
+      <p>Enfield Town <span class="pos">(2nd)</span> will be without Tariq al-Sadi, their player of the month for October, and Mackye Townsend-West for Tuesday's game with Lewes <span class="pos">(4th)</span> and the FA Trophy tie with Spalding United next Saturday, as both have been called up for international duty.</p>
+    </article>
+    <article>
+      <h3>550 and counting</h3>
+      <p>Nyren Clunis made his 550th appearance for Dulwich Hamlet <span class="pos">(14th)</span> in last weekend's defeat at AFC Whyteleafe <span class="pos">(13th)</span>. Wingate &amp; Finchley <span class="pos">(10th)</span> had two players reach 100 games in the same week, goalkeeper Charlie Grainger at Lewes and Sam Cornish against Burgess Hill.</p>
+    </article>
+    <article>
+      <h3>The band on the shirt</h3>
+      <p>Rob Rolfe and Chris Batten of the rock band Enter Shikari, who sponsor St Albans City <span class="pos">(8th)</span>, went on the league's podcast this week to talk about backing their local club, and about the time Batten turned out for the first team.</p>
+    </article>
+  </div>
+</section>
+
+<!-- TOP TWEET -->
+<section class="wrap" id="tweet">
+  <div class="sec-head"><h2>Top tweet</h2></div>
+  <blockquote class="qotw">
+    <q>Did the players think they just had to turn up and collect the points?</q>
+    <footer><b>Enfield Town fan</b>, after the league leaders lost 2-0 at home to AFC Whyteleafe <span class="pos">(13th)</span> and dropped to second.</footer>
+  </blockquote>
+</section>
+
+<!-- ATTENDANCES -->
+<section class="wrap" id="crowds">
+  <div class="sec-head"><h2>Attendances</h2></div>
+  <div class="grid g-table">
+    <div class="bars att" id="crowds-bars"></div>
+    <div class="stack">
+      <div class="statbox">
+        <b class="num">958</b>
+        <p>Average across Saturday's ten games. Dulwich Hamlet's <span class="pos">(14th)</span> Remembrance fixture against Lewes <span class="pos">(4th)</span> drew 3,092, and St Albans City's <span class="pos">(8th)</span> 1,244 was their biggest crowd of the season. At the other end, 109 watched the bottom two draw at Stanway.</p>
+      </div>
+      <div class="statbox">
+        <b class="num">674</b>
+        <p>Season average across the division, from 168 games. Dulwich lead the way with 1,812 a game, while AFC Whyteleafe <span class="pos">(13th)</span> are lowest at 214. Across all four divisions, the league says crowds are up more than 8% on this time last season.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSFERS -->
+<section class="wrap" id="transfers">
+  <div class="sec-head"><h2>Transfers</h2></div>
+      <div class="moves">
+        <div class="move"><span class="dir out">Out</span><div><h3>Liam Moore <span class="pos">(CM)</span></h3><p>Whitehawk <span class="pos">(22nd)</span>, to Cray Valley PM. He captained Sutton United's academy side and made nine first-team appearances at Gander Green Lane before joining Whitehawk in the summer. After 16 games and one goal for the Hawks, he has gone back to Cray Valley, where he spent time on loan last season.</p></div></div>
+      </div>
+</section>
+
+<!-- COMING UP -->
+<section class="wrap" id="fixtures">
+  <div class="sec-head"><h2>Coming up</h2></div>
+  <h3 class="fx-h">Tuesday 10 November · 7.45pm</h3>
+  <div class="results">
+    <article class="res" style="--h1:#1f4e9c;--a1:#d71920">
+      <div class="score fxs"><span>Enfield Town <span class="pos">(2nd)</span></span><span>Lewes <span class="pos">(4th)</span></span></div>
+      <span class="meta">19:45 · David Bryant Stadium</span>
+      <p>If Welling slip up at Whitehawk, a win would put Enfield back on top. They will have to do it without al-Sadi and Townsend-West, though, while Lewes arrive after coming from behind to win at Dulwich and looking to avenge their opening-day defeat by Enfield.</p>
+    </article>
+    <article class="res" style="--h1:#c8102e;--a1:#c8102e">
+      <div class="score fxs"><span>Whitehawk <span class="pos">(22nd)</span></span><span>Welling United <span class="pos">(1st)</span></span></div>
+      <span class="meta">19:45</span>
+      <p>Bottom against top. Welling have won all nine at home, but four of their six trips before Saturday's win at St Albans ended in defeat, and Whitehawk will look to Kamarni Ryan, who has scored seven of their 14 league goals.</p>
+    </article>
+    <article class="res" style="--h1:#c8102e;--a1:#ec6fa8">
+      <div class="score fxs"><span>Eastbourne Borough <span class="pos">(3rd)</span></span><span>Dulwich Hamlet <span class="pos">(14th)</span></span></div>
+      <span class="meta">19:45 · Priory Lane</span>
+      <p>Eastbourne had won eight in a row before Saturday, so this is a first chance to show the 4-1 at Dartford was a one-off. Dulwich have lost their last two league games, the latest after leading Lewes at half-time.</p>
+    </article>
+    <article class="res" style="--h1:#c8102e;--a1:#0b7a3e">
+      <div class="score fxs"><span>Chatham Town <span class="pos">(9th)</span></span><span>Leatherhead <span class="pos">(12th)</span></span></div>
+      <span class="meta">19:45 · The Bauvill Stadium</span>
+      <p>Leatherhead have not played for a week, and they have played only 13 league games, two fewer than Chatham. A win would lift them from 12th to 8th, and Anas Igozouln has seven league goals to his name.</p>
+    </article>
+    <article class="res" style="--h1:#f0a500;--a1:#f0a500">
+      <div class="score fxs"><span>Cray Wanderers <span class="pos">(19th)</span></span><span>Three Bridges <span class="pos">(20th)</span></span></div>
+      <span class="meta">19:45 · Flamingo Park</span>
+      <p>Two days after taking Stockport to extra time, Cray are back to league business. They have played only ten league games, the fewest in the division, and a win would lift them out of the bottom four. Bridges have gone five without a win.</p>
+    </article>
+  </div>
+  <p class="label" style="margin-top:14px">Also on Wednesday: AFC Whyteleafe <span class="pos">(13th)</span> v Dartford <span class="pos">(5th)</span> in the Velocity Cup. Saturday's games and the FA Trophy second round are previewed on Friday.</p>
+</section>
+
+</main>
+
+<footer class="site wrap">
+  <div>
+    <h2 class="sec" style="font-size:28px;margin-bottom:10px">Previous editions</h2>
+    <div class="archive">
+      <span class="issue now">Issue 2 · 8 Nov 2026 · this issue</span>
+      <a class="issue" href="editions/2026-11-04.html">Issue 1 · 4 Nov 2026</a>
+    </div>
+  </div>
+  <details id="sources">
+    <summary>Sources for this edition</summary>
+    <ol>
+      <li><a href="https://www.isthmian.co.uk/results" target="_blank" rel="noopener">Isthmian League: results, scorers, cards and attendances</a></li>
+      <li><a href="https://www.isthmian.co.uk/tables" target="_blank" rel="noopener">Isthmian League: Premier Division table</a></li>
+      <li><a href="https://www.isthmian.co.uk/player-stats" target="_blank" rel="noopener">Isthmian League: player stats (Premier)</a></li>
+      <li><a href="https://www.isthmian.co.uk/attendances" target="_blank" rel="noopener">Isthmian League: attendances (Premier)</a></li>
+      <li><a href="https://www.isthmian.co.uk/fixtures" target="_blank" rel="noopener">Isthmian League: fixtures</a></li>
+      <li><a href="https://dartfordfc.com/2026/11/match-report-dartford-4-eastbourne-borough-1/" target="_blank" rel="noopener">Dartford FC: match report, Dartford 4 Eastbourne Borough 1</a></li>
+      <li><a href="https://dartfordfc.com/2026/11/match-preview-dartford-v-eastbourne-borough/" target="_blank" rel="noopener">Dartford FC: match preview, Dartford v Eastbourne Borough</a></li>
+      <li><a href="https://ebfc.co.uk/2026/11/steve-king-wins-manager-of-the-month-award/" target="_blank" rel="noopener">Eastbourne Borough: Steve King wins Manager of the Month</a></li>
+      <li><a href="https://etfc.london/wasteful-town-handed-rare-setback/" target="_blank" rel="noopener">Enfield Town: Wasteful Town handed rare setback</a></li>
+      <li><a href="https://www.cray-wanderers.com/cray-wanderers-vs-stockport-county-fa-cup-1st-round-sunday-8th-november-2-15-pm-match-preview-information/" target="_blank" rel="noopener">Cray Wanderers: Stockport County preview, with Gary Hillman's and Tim O'Shea's notes</a></li>
+      <li><a href="https://www.isthmian.co.uk/articles/milestones-of-the-week" target="_blank" rel="noopener">Isthmian League: Milestones of the week</a></li>
+      <li><a href="https://www.isthmian.co.uk/articles/enter-shikaris-love-of-non-league-club-or-down-the-clubhouse-extra" target="_blank" rel="noopener">Isthmian League: Enter Shikari's love of non-league club</a></li>
+      <li><a href="https://www.isthmian.co.uk/articles/attendances-up-again" target="_blank" rel="noopener">Isthmian League: Attendances up, again</a></li>
+      <li><a href="https://www.isthmian.co.uk/articles/moore-of-the-millers-again" target="_blank" rel="noopener">Isthmian League: Moore of the Millers, again</a></li>
+      <li><a href="https://dulwichhamletfc.co.uk/latest-news/news-mens-team" target="_blank" rel="noopener">Dulwich Hamlet: men's team news (Remembrance fixture)</a></li>
+      <li><a href="https://wellingunited.com/2026/11/match-preview-cray-valley-pm-v-welling-united-2/" target="_blank" rel="noopener">Welling United: results and home record</a></li>
+      <li><a href="https://bhtfc.co.uk/2026/11/report-chatham-a/" target="_blank" rel="noopener">Burgess Hill Town: report, Chatham (A)</a></li>
+      <li><a href="https://lewesfc.com/2026/11/08/nelson-today-the-fans-were-our-12th-man/" target="_blank" rel="noopener">Lewes FC: Nelson praises "12th man" away support</a></li>
+      <li><a href="https://lewesfc.com/2026/11/08/mens-match-report-dulwich-hamlet-a/" target="_blank" rel="noopener">Lewes FC: men's match report, Dulwich Hamlet (A)</a></li>
+      <li><a href="https://www.skysports.com/football/cray-wanderers-vs-stockport-county/7365983291939529232" target="_blank" rel="noopener">Sky Sports: Cray Wanderers v Stockport County, live commentary</a></li>
+      <li><a href="https://www.stockportcounty.com/news/" target="_blank" rel="noopener">Stockport County: news and match centre</a></li>
+      <li><a href="https://x.com/AFCWhyteleafe" target="_blank" rel="noopener">AFC Whyteleafe on X: man of the match, Huk's penalty saves</a></li>
+      <li><a href="https://x.com/CarshaltonA_FC" target="_blank" rel="noopener">Carshalton Athletic on X: live match posts, 7 Nov</a></li>
+      <li><a href="https://x.com/RamsgateFC" target="_blank" rel="noopener">Ramsgate FC on X: live match posts, 7 Nov</a></li>
+      <li><a href="https://x.com/Official_BHTFC" target="_blank" rel="noopener">Burgess Hill Town on X: live match posts, 7 Nov</a></li>
+      <li><a href="https://x.com/WinFinchleyFC" target="_blank" rel="noopener">Wingate &amp; Finchley on X: live match posts, 7 Nov</a></li>
+      <li><a href="https://x.com/BrentwoodTownFC" target="_blank" rel="noopener">Brentwood Town on X: live match posts, 7 Nov</a></li>
+      <li><a href="https://x.com/ThreeBridgesFC" target="_blank" rel="noopener">Three Bridges on X: player of the match</a></li>
+      <li><a href="https://x.com/stalbanscityfc" target="_blank" rel="noopener">St Albans City on X: live match posts, 7 Nov</a></li>
+      <li><a href="https://x.com/IsthmianLeague" target="_blank" rel="noopener">Isthmian League on X: Cray the league's last FA Cup side</a></li>
+      <li><a href="https://x.com/search?q=to%3AETFCOfficial%20since%3A2026-11-07" target="_blank" rel="noopener">X: fans' replies to Enfield Town (Top tweet)</a></li>
+      <li><a href="https://www.bbc.co.uk/sport/football/live/cmvgxyed798jt" target="_blank" rel="noopener">BBC Sport: FA Cup first round live, Cray Wanderers v Stockport County</a></li>
+    </ol>
+  </details>
+  <p class="ai-note">Isthmian Premier News is produced by Goalmouth Scramble Media - a free fan project. All content AI generated. So if any content is incorrect, blame the machines, not me.</p>
+</footer>
+
+<script>
+(function(){
+  var C={
+    "Enfield Town":["#1f4e9c","#fff"],"Welling United":["#c8102e","#fff"],"Eastbourne Borough":["#c8102e","#111"],
+    "Lewes":["#d71920","#111"],"Dartford":["#fff","#111"],"St Albans City":["#1a3e8c","#f2c300"],
+    "Ramsgate":["#c8102e","#fff"],"Carshalton Athletic":["#7a1f2b","#fff"],"Chatham Town":["#c8102e","#111"],
+    "Wingate & Finchley":["#1b3f94","#fff"],"Dulwich Hamlet":["#ec6fa8","#1b2a5c"],"Aveley":["#1c4fa1","#fff"],
+    "Burgess Hill Town":["#f4c400","#111"],"Leatherhead":["#0b7a3e","#fff"],"AFC Whyteleafe":["#127a3a","#fff"],
+    "Cheshunt":["#f29f05","#111"],"Maldon & Tiptree":["#2456a8","#d0021b"],"Cray Wanderers":["#f0a500","#111"],
+    "Brentwood Town":["#6cb4e4","#fff"],"Three Bridges":["#f0a500","#111"],"Stanway Rovers":["#e2a800","#111"],
+    "Whitehawk":["#c8102e","#fff"]
+  };
+  var NICK={
+    "AFC Whyteleafe":"The Leafe","Aveley":"The Millers","Brentwood Town":"The Blues","Burgess Hill Town":"The Hillians",
+    "Carshalton Athletic":"The Robins","Chatham Town":"The Chats","Cheshunt":"The Ambers","Cray Wanderers":"The Wands",
+    "Dartford":"The Darts","Dulwich Hamlet":"The Hamlet","Eastbourne Borough":"The Sports","Enfield Town":"The Towners",
+    "Leatherhead":"The Tanners","Lewes":"The Rooks","Maldon & Tiptree":"The Jammers","Ramsgate":"The Rams",
+    "St Albans City":"The Saints","Stanway Rovers":"The Rovers","Three Bridges":"The Bridges","Welling United":"The Wings",
+    "Whitehawk":"The Hawks","Wingate & Finchley":"The Blues"
+  };
+  function chip(n){var c=C[n]||["#888","#ccc"];return '<i class="chip" style="--c1:'+c[0]+';--c2:'+c[1]+'"></i>';}
+  function esc(s){return s.replace(/&/g,"&amp;");}
+  function barColour(n){var c=(C[n]||["#888"])[0];return c==="#fff"?"#555":c;}
+
+  // club, P, W, D, L, GD, Pts, form, position in the last issue (Issue 1, 4 Nov)
+  var T=[
+    ["Welling United",16,12,0,4,18,36,"WLWWW",2],["Enfield Town",15,11,1,3,25,34,"WDWWL",1],["Eastbourne Borough",15,10,1,4,11,31,"WWWWL",3],
+    ["Lewes",16,9,3,4,6,30,"WDDLW",4],["Dartford",16,10,0,6,5,30,"LLLWW",5],["Ramsgate",15,8,1,6,14,25,"WLWLW",7],
+    ["Carshalton Athletic",17,8,1,8,-7,25,"LDLLW",9],["St Albans City",13,7,2,4,6,23,"WWWLL",6],["Chatham Town",15,7,1,7,4,22,"WWLLD",11],
+    ["Wingate & Finchley",15,6,4,5,-1,22,"WWDDL",8],["Burgess Hill Town",16,5,7,4,-2,22,"WLLDD",13],["Leatherhead",13,6,3,4,6,21,"DLLWW",10],
+    ["AFC Whyteleafe",16,6,3,7,1,21,"WWLWW",15],["Dulwich Hamlet",16,6,3,7,-2,21,"LDWLL",12],["Aveley",16,6,2,8,-3,20,"WLWWL",14],
+    ["Maldon & Tiptree",18,6,2,10,-14,20,"WDLWW",17],["Cheshunt",16,4,6,6,-8,18,"DLLWL",16],["Brentwood Town",15,5,1,9,-3,16,"WWLLD",19],
+    ["Cray Wanderers",10,4,3,3,8,15,"LDWLW",18],["Three Bridges",15,2,4,9,-15,10,"LDLLD",20],["Stanway Rovers",16,2,2,12,-26,8,"LWLLD",21],
+    ["Whitehawk",16,1,4,11,-23,7,"LDLLD",22]
+  ];
+  var h="";
+  T.forEach(function(r,i){
+    var pos=i+1,z=pos===1?"z-up":pos<=7?"z-po":pos>=19?"z-down":"";
+    var d=r[8]-pos,mv=d>0?'<span class="mv-up">▲'+d+'</span>':d<0?'<span class="mv-down">▼'+(-d)+'</span>':'<span class="mv-same">–</span>';
+    var f=r[7].split("").map(function(x){return '<i class="'+x+'">'+x+'</i>';}).join("");
+    h+='<tr class="'+z+'"><td>'+pos+'</td><td class="mv">'+mv+'</td><td class="team"><span class="tm">'+chip(r[0])+'<span>'+esc(r[0])+' <small>('+NICK[r[0]]+')</small></span></span></td><td>'+r[1]+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td><td>'+r[4]+'</td><td>'+(r[5]>0?"+":"")+r[5]+'</td><td class="pts">'+r[6]+'</td><td><span class="form">'+f+'</span></td></tr>';
+  });
+  document.getElementById("tbl").innerHTML=h;
+
+  // player, club, goals, appearances (incl. sub), minutes
+  var G=[
+    ["Toby Aromolaran","AFC Whyteleafe",13,17,1059],["Callum Jones","Ramsgate",9,15,1275],["Ade Yusuff","Cray Wanderers",8,9,722],
+    ["Max Fiddes","Dartford",8,18,1200],["Nahum Melvin-Lambert","Welling United",8,21,763],["Nathan Young-Coombes","Carshalton Athletic",8,17,1503],
+    ["Amrit Bansal-McNulty","Enfield Town",7,18,870],["Anas Igozouln","Leatherhead",7,13,875],["Anointed Chukwu","Wingate & Finchley",7,15,886],
+    ["Billy Munday","Ramsgate",7,15,1198],["Chris Whelpdale","Burgess Hill Town",7,19,1119],["Dan Smith","Dartford",7,18,1228],
+    ["Inih Effiong","St Albans City",7,17,656],["Josh Rees","Eastbourne Borough",7,14,1260],["Kai Corbett","Eastbourne Borough",7,13,1128],
+    ["Kamarni Ryan","Whitehawk",7,17,1044],["Noel Leighton","Three Bridges",7,8,702],["Thomas Avgoustidis","Enfield Town",7,17,1002],
+    ["Alfie Paxman","Ramsgate",6,15,1317],["Ben Greenhalgh","Dartford",6,17,1281]
+  ];
+  var g="",rank=0,last=null,gmax=G[0][2];
+  G.forEach(function(p,i){
+    if(p[2]!==last){rank=i+1;last=p[2];}
+    var m=Math.round(p[4]/p[2]);
+    g+='<div class="bar"><span class="rk">'+rank+'</span><span class="who gb-who"><span>'+esc(p[0])+'</span><small>'+esc(p[1])+'</small></span><span class="track" title="'+p[2]+' goals, one every '+m+' minutes"><span class="fill" style="--c1:'+barColour(p[1])+';width:'+(p[2]/gmax*100)+'%"></span></span><span class="v">'+p[2]+'<br><span class="mpg">'+m+'′</span></span></div>';
+  });
+  document.getElementById("gb").innerHTML=g;
+
+  // this round's crowds: home, away, attendance, home club's season average
+  var A=[
+    ["Dulwich Hamlet","Lewes",3092,1812],["Ramsgate","Aveley",1444,1143],["St Albans City","Welling United",1244,847],
+    ["Dartford","Eastbourne Borough",1108,1118],["Chatham Town","Burgess Hill Town",1008,1133],["Enfield Town","AFC Whyteleafe",653,734],
+    ["Carshalton Athletic","Cheshunt",448,488],["Three Bridges","Brentwood Town",278,332],["Wingate & Finchley","Maldon & Tiptree",192,288],
+    ["Stanway Rovers","Whitehawk",109,219]
+  ];
+  var top=Math.max.apply(null,A.map(function(r){return r[2];})),a="";
+  A.forEach(function(r){
+    var diff=r[2]-r[3],dtxt=(diff>0?"+":diff<0?"−":"±")+Math.abs(diff).toLocaleString("en-GB");
+    a+='<div class="bar"><span class="who">'+chip(r[0])+' '+esc(r[0])+' v '+esc(r[1])+'</span><span class="track"><span class="fill" style="--c1:'+barColour(r[0])+';width:'+(r[2]/top*100)+'%"></span></span><span class="v" style="font-size:17px">'+r[2].toLocaleString("en-GB")+'<br><span class="mpg avg '+(diff<0?"neg":"pos")+'" title="'+r[2]+' against a season average of '+r[3]+'">'+dtxt+' avg</span></span></div>';
+  });
+  document.getElementById("crowds-bars").innerHTML=a;
+})();
+</script>
+
+
+<style>
+/* One green football that travels from heading to heading as the reader moves down the page. */
+#ballbox{position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;z-index:6}
+#ball{position:absolute;left:0;top:0;width:100px;height:100px;transform-origin:50% 50%;will-change:transform}
+#ball svg{display:block;width:100%;height:100%}
+.ball-body{fill:var(--paper)}
+.ball-patch{fill:var(--pitch)}
+.ball-seam{stroke:var(--pitch);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.ball-rim{stroke:var(--pitch);stroke-width:3.6;fill:none}
+</style>
+<div id="ballbox" aria-hidden="true"><div id="ball"></div></div>
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var ball = document.getElementById("ball");
+  function sy(){ return window.scrollY; }
+
+  // ---------- the ball: a real 32-panel football (12 pentagons, 20 hexagons), drawn on a sphere ----------
+  (function(){
+    var phi = (1 + Math.sqrt(5)) / 2, R = 47;
+    function sub(a, b){ return [a[0] - b[0], a[1] - b[1], a[2] - b[2]]; }
+    function dot(a, b){ return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
+    function len(a){ return Math.sqrt(dot(a, a)); }
+    function norm(a){ var l = len(a); return [a[0] / l, a[1] / l, a[2] / l]; }
+    function cross(a, b){ return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
+    function cyc(p){ return [p, [p[1], p[2], p[0]], [p[2], p[0], p[1]]]; }
+    function signed(list, seeds){
+      seeds.forEach(function(b){ cyc(b).forEach(function(p){
+        for (var s = 0; s < 8; s++){
+          var q = [s & 1 ? -p[0] : p[0], s & 2 ? -p[1] : p[1], s & 4 ? -p[2] : p[2]];
+          if (!list.some(function(v){ return len(sub(v, q)) < 1e-6; })) list.push(q);
+        }
+      }); });
+      return list;
+    }
+    // truncated icosahedron corners (edge length 2), and the centres of its 12 pentagons
+    var V = signed([], [[0, 1, 3 * phi], [1, 2 + phi, 2 * phi], [phi, 2, 2 * phi + 1]]);
+    var E = [];
+    for (var i = 0; i < V.length; i++) for (var j = i + 1; j < V.length; j++) if (Math.abs(len(sub(V[i], V[j])) - 2) < 1e-6) E.push([i, j]);
+    var PC = signed([], [[0, 1, phi]]).map(norm);
+    var U = V.map(norm);
+
+    // view: looking straight at one pentagon, tipped slightly so the ball reads as round
+    var az = PC[0], ax = norm(cross([0.3, 1, 0.1], az)), ay = cross(az, ax);
+    var t1 = 14 * Math.PI / 180, t2 = -10 * Math.PI / 180;
+    function proj(v){
+      var x = dot(v, ax), y = dot(v, ay), z = dot(v, az);
+      var y2 = y * Math.cos(t1) - z * Math.sin(t1), z2 = y * Math.sin(t1) + z * Math.cos(t1);
+      return [x * Math.cos(t2) + z2 * Math.sin(t2), y2, -x * Math.sin(t2) + z2 * Math.cos(t2)];
+    }
+    function toSvg(p){
+      var x = p[0], y = p[1];
+      if (p[2] < 0){ var l = Math.hypot(x, y) || 1; x /= l; y /= l; }   // round the far side onto the rim
+      var r = Math.hypot(x, y), s = r ? Math.min(1, r * 1.07) / r : 1;    // ease the outer edge onto the rim, so there is only one outline
+      x *= s; y *= s;
+      return (50 + R * x).toFixed(2) + " " + (50 - R * y).toFixed(2);
+    }
+    function arc(a, b, n){
+      var out = [];
+      for (var t = 0; t <= n; t++) out.push(norm([a[0] + (b[0] - a[0]) * t / n, a[1] + (b[1] - a[1]) * t / n, a[2] + (b[2] - a[2]) * t / n]));
+      return out;
+    }
+
+    var patches = "";
+    PC.forEach(function(c){
+      if (proj(c)[2] < -0.12) return;
+      var near = U.map(function(v, idx){ return [dot(v, c), idx]; }).sort(function(a, b){ return b[0] - a[0]; }).slice(0, 5).map(function(p){ return U[p[1]]; });
+      var bu = norm(cross(c, [0.13, 0.71, 0.69])), bw = cross(c, bu);
+      near.sort(function(a, b){ return Math.atan2(dot(a, bw), dot(a, bu)) - Math.atan2(dot(b, bw), dot(b, bu)); });
+      var pts = [];
+      near.forEach(function(v, q){ arc(v, near[(q + 1) % 5], 6).slice(0, -1).forEach(function(p){ pts.push(toSvg(proj(p))); }); });
+      patches += '<path class="ball-patch" d="M' + pts.join("L") + 'Z"/>';
+    });
+
+    var seams = "";
+    E.forEach(function(e){
+      var run = [];
+      arc(U[e[0]], U[e[1]], 8).forEach(function(p){
+        var q = proj(p);
+        if (q[2] >= 0.3) run.push(toSvg(q));   // seams right on the horizon would read as a second outline
+        else { if (run.length > 1) seams += "M" + run.join("L"); run = []; }
+      });
+      if (run.length > 1) seams += "M" + run.join("L");
+    });
+
+    ball.innerHTML =
+      '<svg viewBox="0 0 100 100"><defs><clipPath id="ipn-ball-clip"><circle cx="50" cy="50" r="' + R + '"/></clipPath></defs>' +
+      '<circle class="ball-body" cx="50" cy="50" r="' + R + '"/>' +
+      '<g clip-path="url(#ipn-ball-clip)">' + patches + '<path class="ball-seam" d="' + seams + '"/></g>' +
+      '<circle class="ball-rim" cx="50" cy="50" r="' + R + '"/></svg>';
+  })();
+  var svg = ball.firstChild;
+
+  // ---------- where the ball settles: just after each heading's last word, as tall as its capitals ----------
+  var stops = [], vh = innerHeight, meter = document.createElement("canvas").getContext("2d");
+
+  function metrics(h){
+    var cs = getComputedStyle(h), size = parseFloat(cs.fontSize);
+    meter.font = cs.fontWeight + " " + size + "px " + cs.fontFamily;
+    var m = meter.measureText("H");
+    return {
+      cap: m.actualBoundingBoxAscent || size * 0.7,
+      ascent: m.fontBoundingBoxAscent || null,
+      descent: m.fontBoundingBoxDescent || null
+    };
+  }
+
+  function restBeside(h, size){
+    var rng = document.createRange(); rng.selectNodeContents(h);
+    var lines = [];
+    [].slice.call(rng.getClientRects()).forEach(function(q){
+      if (q.width < 1) return;
+      var L = lines.filter(function(l){ return Math.abs(l.top - q.top) < 6; })[0];
+      if (L){ L.right = Math.max(L.right, q.right); L.bottom = Math.max(L.bottom, q.bottom); }
+      else lines.push({ top: q.top, bottom: q.bottom, right: q.right });
+    });
+    lines.sort(function(a, b){ return b.top - a.top; });
+    var m = metrics(h), d = size || Math.round(m.cap), gap = Math.max(8, d * 0.3);
+    var limit = Math.min(h.getBoundingClientRect().right, document.documentElement.clientWidth - 6);
+    for (var i = 0; i < lines.length; i++){
+      var l = lines[i], x = l.right + gap + d / 2;
+      if (x + d / 2 > limit) continue;
+      var base = m.ascent && m.descent ? l.top + (l.bottom - l.top - m.ascent - m.descent) / 2 + m.ascent : l.top + (l.bottom - l.top) * 0.78;
+      // maxX: how far right the ball can roll along this line before it runs out of room
+      return { x: x + scrollX, y: base - d / 2 + sy(), d: d, maxX: document.documentElement.clientWidth - 2 - d / 2 + scrollX };
+    }
+    return null;
+  }
+
+  function layout(){
+    vh = innerHeight;
+    stops = [];
+    var mast = document.querySelector(".mast"), h1 = mast && mast.querySelector("h1");
+    if (h1){
+      var at = restBeside(h1);
+      if (!at){
+        // no room beside the title: sit on the masthead's thick rule instead
+        var mr = mast.getBoundingClientRect(), pr = parseFloat(getComputedStyle(mast).paddingRight), dd = Math.round(metrics(document.querySelector(".sec-head h2") || h1).cap);
+        at = { x: mr.right - pr - dd / 2 + scrollX, y: mr.bottom - 6 - dd / 2 + sy(), d: dd, maxX: document.documentElement.clientWidth - 2 - dd / 2 + scrollX };
+      }
+      at.top = -Infinity; stops.push(at);
+    }
+    [].slice.call(document.querySelectorAll(".sec-head h2, footer.site h2")).forEach(function(h){
+      // the footer heading is smaller, but the ball keeps the size it had at the last section
+      var prev = stops[stops.length - 1], keep = h.closest("footer") && prev ? prev.d : 0;
+      var at = restBeside(h, keep);
+      if (at){ at.top = h.getBoundingClientRect().top + sy(); stops.push(at); }
+    });
+
+    // The ball stays beside a heading until the next heading comes into view (end), then drops to it.
+    var prevEnd = -Infinity;
+    stops.forEach(function(s, i){
+      s.arrive = i === 0 ? -Infinity : s.top - vh * 0.72;
+      if (i === stops.length - 1){ s.end = Infinity; return; }
+      s.end = Math.max(stops[i + 1].top - vh * 0.72, i === 0 ? 40 : s.arrive + 80, prevEnd + 1);
+      prevEnd = s.end;
+    });
+  }
+
+  function indexAt(S){
+    if (S >= document.documentElement.scrollHeight - vh - 2) return stops.length - 1;
+    var i = 0;
+    while (i < stops.length - 1 && S >= stops[i].end) i++;
+    return i;
+  }
+
+  // where the ball sits at heading i: just after the last word
+  function restAt(i){
+    var s = stops[i];
+    return { x: s.x, y: s.y, d: s.d };
+  }
+
+  // ---------- travel: fall under gravity, a few dying bounces, then a short roll to a stop ----------
+  var G = 2600, E = 0.42, pos = { x: 0, y: 0, d: 30 }, rot = 0, lastX = null, target = -1, flight = null;
+
+  function hermite(a, b, ma, mb, u){
+    var u2 = u * u, u3 = u2 * u;
+    return (2 * u3 - 3 * u2 + 1) * a + (u3 - 2 * u2 + u) * ma + (-2 * u3 + 3 * u2) * b + (u3 - u2) * mb;
+  }
+
+  function launch(i){
+    var to = restAt(i), st = stops[i];
+    var S = Math.max(0, Math.min(1.5 * to.d, st.maxX - to.x));   // it lands this far to the right, then rolls back to its spot
+    var from = { x: pos.x, y: pos.y, d: pos.d }, top = sy() - from.d, bottom = sy() + vh + from.d;
+    if (from.y < top) from.y = top;
+    if (from.y > bottom) from.y = bottom;
+    // going down it just drops; going back up needs a hop, but not so high it leaves the top of the screen
+    var apex = from.y <= to.y ? from.y - 0.01 : Math.min(to.y - 0.3 * to.d, Math.max(to.y - Math.max(40, to.d * 1.6), sy() + 0.6 * to.d, 0.6 * to.d));
+    var tUp = Math.sqrt(2 * (from.y - apex) / G), tDown = Math.sqrt(2 * (to.y - apex) / G);
+    var bounces = [], Tb = 0, v = G * tDown;
+    while ((v *= E) > 0 && v * v / (2 * G) > 1.2){ bounces.push({ v: v, dur: 2 * v / G }); Tb += 2 * v / G; }
+    // slide left through the bounces, then roll the last stretch and slow to a stop (speeds match at the handover)
+    var Tg = Math.max(Tb, 0.3), vb = S > 0 ? 0.55 * S / Tg : 0;
+    flight = {
+      start: performance.now(), to: to, from: from, apex: apex, tUp: tUp, Tm: tUp + tDown,
+      bounces: bounces, Tg: Tg, S: S, vb: vb, Tr: S > 0 ? 0.9 * S / vb : 0, xLand: to.x + S
+    };
+    requestAnimationFrame(step);
+  }
+
+  function smooth(u){ return u * u * (3 - 2 * u); }
+
+  function step(now){
+    var f = flight;
+    if (!f) return;
+    var t = (now - f.start) / 1000, spin = null;
+    if (t < f.Tm){
+      // in the air: a smooth curve that arrives moving left, towards the heading, with a spin that
+      // builds to match the roll it will have when it lands (so no backspin on touchdown)
+      var u = t / f.Tm;
+      pos.x = hermite(f.from.x, f.xLand, 0, -f.vb * f.Tm, u);
+      pos.y = f.apex + 0.5 * G * (t - f.tUp) * (t - f.tUp);
+      pos.d = f.from.d + (f.to.d - f.from.d) * u;
+      spin = -f.vb / (f.to.d / 2) * smooth(u);
+    } else if ((t -= f.Tm) < f.Tg){
+      var h = 0, tb = t;
+      for (var k = 0; k < f.bounces.length; k++){ var b = f.bounces[k]; if (tb < b.dur){ h = b.v * tb - 0.5 * G * tb * tb; break; } tb -= b.dur; }
+      pos.x = f.xLand - f.vb * t; pos.y = f.to.y - h; pos.d = f.to.d;
+    } else if ((t -= f.Tg) < f.Tr){
+      var r = t / f.Tr;
+      pos.x = f.xLand - 0.55 * f.S - 0.45 * f.S * (1 - (1 - r) * (1 - r)); pos.y = f.to.y; pos.d = f.to.d;
+    } else {
+      flight = null;
+      pos = restAt(target);
+      render(now);
+      return;
+    }
+    render(now, spin);
+    requestAnimationFrame(step);
+  }
+
+  var lastT = null;
+  function render(now, spin){
+    now = now || performance.now();
+    var W = document.documentElement.clientWidth + scrollX;
+    pos.x = Math.min(W - pos.d / 2 - 2, Math.max(pos.d / 2 + 2, pos.x));
+    if (spin != null && lastT != null) rot += spin * (now - lastT) / 1000 * 57.2958;          // in the air: steady spin
+    else if (spin == null && lastX != null) rot += (pos.x - lastX) / (pos.d / 2) * 57.2958;  // on the ground: rolls with its travel
+    lastX = pos.x; lastT = now;
+    ball.style.transform = "translate(" + (pos.x - 50).toFixed(1) + "px," + (pos.y - 50).toFixed(1) + "px) scale(" + (pos.d / 100).toFixed(4) + ")";
+    svg.style.transform = "rotate(" + rot.toFixed(1) + "deg)";
+  }
+
+  function check(){
+    if (!stops.length) return;
+    var i = indexAt(sy());
+    if (i === target) return;
+    target = i;
+    if (reduce || !ball.dataset.ready){ flight = null; pos = restAt(i); lastX = null; render(); ball.dataset.ready = "1"; return; }
+    launch(i);
+  }
+
+  function refresh(){
+    layout();
+    if (!stops.length) return;
+    flight = null;
+    target = indexAt(sy()); pos = restAt(target); lastX = null; render(); ball.dataset.ready = "1";
+  }
+
+  var queued = false, t;
+  addEventListener("scroll", function(){ if (!queued){ queued = true; requestAnimationFrame(function(){ queued = false; check(); }); } }, { passive: true });
+  addEventListener("resize", function(){ clearTimeout(t); t = setTimeout(refresh, 120); });
+  addEventListener("load", refresh);
+  if (document.fonts && document.fonts.ready){
+    document.fonts.ready.then(refresh);
+    if (document.fonts.addEventListener) document.fonts.addEventListener("loadingdone", refresh);   // re-measure once the headline font arrives
+  }
+  refresh();
+})();
+</script>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
+<style>
+/* Scoreboard: the deep-navy floodlit page, with white match cards and drawn ground icons. One committed dark look. */
+:root:root:root{
+  --paper:#0e1a2f;--card:#15233c;--ink:#f2f4f8;--muted:#a3b3ca;--rule:#28395b;
+  --pitch:#ffd23f;--pitch-ink:#0e1a2f;--pitch-soft:#22314f;--up:#53d48f;--down:#ff7a72;
+  --bar:#ffd23f;--glow:rgba(255,238,178,.11);--beam:rgba(255,240,190,.24);--steel:#8291aa;--lamp:#fff6cf;--crazy:#b98cff;
+  --display:"Archivo","Arial Narrow",sans-serif;--body:"Archivo",Arial,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:dark}
+body{background:radial-gradient(900px 420px at 8% -8%,var(--glow),transparent 62%),radial-gradient(900px 420px at 92% -8%,var(--glow),transparent 62%),var(--paper);font-size:17.5px}
+h1,h2,h3{font-stretch:72%;font-weight:900;letter-spacing:0}
+.mast{border-bottom:6px solid var(--bar)}
+.mast h1{font-size:clamp(28px,7.6vw,94px)}
+.strap{border-top-color:var(--rule)}
+.sec-head h2{border-left:8px solid var(--bar);padding-left:14px}
+.statbox{border:1px solid var(--rule);background:var(--card)}
+.glance h3,th{border-bottom-color:var(--bar)}
+.archive .issue{border-color:var(--muted)}
+.qotw q::before,.qotw q::after{color:var(--muted)}
+
+/* good, bad and crazy week: purple for crazy, and calmer label and name sizes */
+.gbc .tag{font-size:24px}
+.gbc h3{font-size:21px}
+.gbc .club{font-size:16px}
+.gbc article:nth-child(3){--tone:var(--crazy)!important}
+
+/* match and fixture cards: white, with a thicker club-colour stripe */
+.res{--card:#fbfcfd;--ink:#111823;--muted:#4b5566;--rule:#d6dce4;--pitch:#12347a;background:var(--card);color:var(--ink);border-color:transparent}
+.res::before{width:10px}
+.res .score,.res p,.res .meta{padding-left:12px}
+
+/* the table: no zone shading, lines mark the cut-offs instead */
+tr.z-up td,tr.z-po td,tr.z-down td{background:none}
+tr.z-up td:first-child,tr.z-po td:first-child,tr.z-down td:first-child{box-shadow:none}
+tr.z-up td{border-bottom:2px solid var(--bar)}
+/* the play-off line: one evenly spaced row of dots drawn across the whole row (cell borders restart per cell and bunch up) */
+tr.z-po:has(+ tr:not(.z-po)) td{border-bottom-color:transparent}
+tr.z-po + tr:not(.z-po){background-image:radial-gradient(circle at 3px 2px,var(--bar) 1.5px,transparent 1.9px);background-size:8px 4px;background-repeat:repeat-x;background-position:0 -1px}
+tr:not(.z-down) + tr.z-down td{border-top:2px solid var(--down)}
+.key b.ln{width:24px;height:0;border:0;border-top:2px solid var(--bar);display:inline-block}
+.key b.ln.dot{border:0;height:4px;background:radial-gradient(circle at 3px 2px,var(--bar) 1.5px,transparent 1.9px) 0 0/8px 4px repeat-x}
+.key b.ln.rel{border-top-color:var(--down)}
+
+/* ---------- floodlight pylons beside the quotes ---------- */
+.has-lamp{position:relative;overflow:hidden}
+.has-lamp>*{position:relative;z-index:1}
+.has-lamp::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 62% 135% at 94% 4%,var(--beam),transparent 68%)}
+.lamp{position:absolute!important;z-index:1;top:22px;right:max(16px,env(safe-area-inset-right,0px));width:118px;height:calc(100% - 34px);pointer-events:none}
+.lamp svg{display:block;width:100%;height:100%}
+.lamp .steel{stroke:var(--steel);fill:none;stroke-width:2.2;stroke-linecap:round}
+.lamp .frame{fill:var(--steel)}
+.lamp .bulb{fill:var(--lamp)}
+.lamp .halo{fill:var(--lamp);opacity:.35;filter:blur(6px)}
+.has-lamp .qotw{padding-right:140px}
+@media(max-width:700px){.lamp{width:70px}.has-lamp .qotw{padding-right:84px}}
+
+/* ---------- ground icons beside the section headings ---------- */
+.has-icon{position:relative}
+.has-icon .sec-head{padding-right:190px}
+.sec-icon{position:absolute;top:16px;right:max(16px,env(safe-area-inset-right,0px));height:76px;pointer-events:none}
+.sec-icon svg{display:block;height:100%;width:auto;overflow:visible}
+@media(max-width:700px){.sec-icon{height:50px;top:28px}.has-icon .sec-head{padding-right:100px}}
+
+/* attendances: give the match names room, and let long ones wrap instead of being cut off */
+.att .bar{grid-template-columns:minmax(0,2.3fr) minmax(0,1.5fr) 74px}
+.att .bar .who{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.25;align-items:flex-start}
+.att .bar .who .chip{margin-top:3px}
+@media(max-width:560px){.att .bar{grid-template-columns:minmax(0,1fr) 54px 70px}}
+
+/* attendances: each crowd's difference from the home club's season average, under the figure */
+.att .mpg.avg{white-space:nowrap;font-size:10.5px}
+.att .mpg.neg{color:var(--down)}
+.att .mpg.pos{color:var(--up)}
+
+/* scorer lines: each club's short name stands out a little */
+.res .meta b{color:var(--ink);font-weight:600}
+
+/* boxes have no outlines, apart from the white match and fixture cards */
+.note,.move,.statbox,details,.mrow,.card-row,.fx,.archive .issue{border:0}
+.gbc article{border:0;border-top:8px solid var(--tone)}
+
+/* full stops in white text are floodlight yellow (the script at the bottom marks them) */
+.fs{color:var(--bar)}
+
+/* phones: the masthead goes onto two lines, a smaller ISTHMIAN over a big PREMIER NEWS (the script below wraps the first word) */
+@media(max-width:600px){
+  .mast h1{white-space:normal;font-size:12.4vw;line-height:.92}
+  .mast h1 .mh1{display:block;font-weight:inherit;font-size:.48em;letter-spacing:.06em;line-height:1.05}
+}
+
+/* In other news: yellow rules above each item, for a touch more colour */
+.odd article{border-top-color:var(--bar)}
+/* A sub-heading that follows a block of match or fixture cards (e.g. an FA Cup tie under Match reports) gets clear space above it */
+.results + .fx-h{margin-top:34px}
+/* Front page order (8 Nov 2026): weekend round-up with its numbers, then results, then the top story */
+.front{grid-template-columns:minmax(0,1fr);grid-template-areas:"round" "glance" "story"}
+.front .f-round{border:0;padding:0}
+.front .f-story{border-top:1px solid var(--rule);padding-top:24px}
+@media(min-width:760px){.front{grid-template-columns:minmax(0,1fr);grid-template-areas:"round" "glance" "story"}}
+@media(min-width:1100px){
+  .front{grid-template-columns:minmax(0,1fr) fit-content(360px) minmax(0,1fr);grid-template-areas:"round glance story"}
+  .front .f-story{border-top:0;padding-top:0;border-left:1px solid var(--rule);padding-left:28px}
+}
+</style>
+<script>
+(function(){
+  function f(n){ return Math.round(n * 10) / 10; }
+
+  // ---------- floodlight pylon (unchanged) ----------
+  var pylon =
+    '<svg viewBox="0 0 120 320" preserveAspectRatio="xMaxYMin meet" aria-hidden="true">' +
+      '<g transform="rotate(-14 70 40)">' +
+        '<rect class="frame" x="22" y="14" width="92" height="56" rx="3"/>' +
+        [0, 1, 2, 3].map(function(c){ return [0, 1].map(function(r){ var x = 34 + c * 23, y = 29 + r * 26;
+          return '<circle class="halo" cx="' + x + '" cy="' + y + '" r="12"/><circle class="bulb" cx="' + x + '" cy="' + y + '" r="8.5"/>'; }).join(""); }).join("") +
+      '</g>' +
+      '<path class="steel" d="M58 74 L50 320 M80 74 L88 320"/>' +
+      '<path class="steel" d="' + (function(){ var d = "", y; for (y = 80; y < 316; y += 26){ var t = (y - 74) / 246, l = 58 - 8 * t, r = 80 + 8 * t, t2 = (y + 26 - 74) / 246;
+        d += "M" + f(l) + " " + y + "L" + f(80 + 8 * t2) + " " + (y + 26) + "M" + f(r) + " " + y + "L" + f(58 - 8 * t2) + " " + (y + 26); } return d; })() + '"/>' +
+    '</svg>';
+
+  // ---------- goal: frame in perspective, mesh net, ball in the back of it ----------
+  var goal =
+    '<svg viewBox="0 0 170 96">' +
+    '<defs><pattern id="mesh" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0H6M0 0V6" stroke="#e9edf3" stroke-width=".7" fill="none"/></pattern></defs>' +
+    '<path d="M2 90 H168" stroke="#e9edf3" stroke-opacity=".45" stroke-width="1.5"/>' +
+    '<g opacity=".55"><path fill="url(#mesh)" d="M30 26 H140 L142 74 H28 Z"/></g>' +
+    '<g opacity=".8"><path fill="url(#mesh)" d="M16 12 H154 L140 26 H30 Z M16 12 L30 26 L28 74 L16 88 Z M154 12 L140 26 L142 74 L154 88 Z"/></g>' +
+    '<path d="M16 12 L30 26 L28 74 L16 88 M154 12 L140 26 L142 74 L154 88 M28 74 H142 M30 26 H140" stroke="#8291aa" stroke-width="1.6" fill="none" stroke-linejoin="round"/>' +
+    '<g transform="translate(116 64)"><circle r="9" fill="#fbfcfd" stroke="#111823" stroke-width="1"/><path d="M0 -3.4 L3.2 -1 L2 2.8 H-2 L-3.2 -1 Z M0 -9 L-2 -6.6 L0 -5.4 L2 -6.6 Z M8.6 -1.4 L6 0 L6.4 2.6 L8.6 3 Z M-8.6 -1.4 L-6 0 L-6.4 2.6 L-8.6 3 Z M-3.6 8.2 L-2.6 5.6 H2.6 L3.6 8.2 Z" fill="#111823"/></g>' +
+    '<path d="M16 89 V12 H154 V89" stroke="#f4f6f9" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<path d="M18 86 V14 H152" stroke="#c9d1dc" stroke-width="1.4" fill="none"/>' +
+    '</svg>';
+
+  // ---------- golden boot: side profile, laces, soleplate and studs ----------
+  var boot =
+    '<svg viewBox="0 0 170 96">' +
+    '<defs><linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe680"/><stop offset=".45" stop-color="#f7c829"/><stop offset="1" stop-color="#d49b00"/></linearGradient></defs>' +
+    '<path fill="url(#gold)" stroke="#9a7400" stroke-width="1.4" stroke-linejoin="round" d="M24 70 C17 63 15 44 22 30 C27 33 37 34 48 31 C52 30 56 28 58 27 L70 31 C92 38 118 46 138 52 C152 56 160 62 155 68 C153 70 149 71 144 71 L26 71 Z"/>' +
+    '<path fill="#a57a00" fill-opacity=".38" d="M24 70 C17 63 15 44 22 30 C27 33 32 34 36 34 C38 46 40 60 44 71 L26 71 Z"/>' +
+    '<path d="M22 30 C27 33 37 34 48 31 C52 30 56 28 58 27" stroke="#7d5c00" stroke-width="3" fill="none" stroke-linecap="round"/>' +
+    '<path fill="#fff4c4" d="M59 29 L103 42 L99 49 L57 36 Z"/>' +
+    [0, 0.25, 0.5, 0.75, 1].map(function(t){ var x = 62 + 36 * t, y = 31.5 + 12 * t;
+      return '<path d="M' + f(x - 2) + ' ' + f(y + 5.5) + ' L' + f(x + 4) + ' ' + f(y - 2) + '" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"/><circle cx="' + f(x - 2.4) + '" cy="' + f(y + 6) + '" r="1.1" fill="#7d5c00"/>'; }).join("") +
+    '<path d="M64 59 C86 52 110 52 134 59" stroke="#b58300" stroke-width="3.2" fill="none" stroke-linecap="round"/>' +
+    '<path d="M100 45 C120 50 138 55 150 61" stroke="#ffffff" stroke-opacity=".6" stroke-width="2.4" fill="none" stroke-linecap="round"/>' +
+    '<path fill="#2c3648" d="M26 71 H146 C150 71 152 73 150 76 H28 C24 76 23 73 26 71 Z"/>' +
+    [34, 50, 96, 112, 128, 142].map(function(x){ return '<path fill="#c9d1dc" d="M' + (x - 4.5) + ' 76 L' + (x + 4.5) + ' 76 L' + (x + 3) + ' 84 L' + (x - 3) + ' 84 Z"/>'; }).join("") +
+    '</svg>';
+
+  // ---------- club shirt: the back, with a number ----------
+  var shirt =
+    '<svg viewBox="0 0 120 112">' +
+    '<defs><linearGradient id="kit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe066"/><stop offset="1" stop-color="#f2be17"/></linearGradient></defs>' +
+    '<path fill="url(#kit)" stroke="#b58a00" stroke-width="1.2" stroke-linejoin="round" d="M44 20 Q60 27 76 20 L99 30 L113 54 L97 61 L91 51 V105 Q60 108 29 105 V51 L23 61 L7 54 L21 30 Z"/>' +
+    '<path d="M44 20 Q60 27 76 20 Q60 31 44 20 Z" fill="#12347a"/>' +
+    '<path d="M113 54 L97 61 M7 54 L23 61" stroke="#12347a" stroke-width="5" stroke-linecap="round"/>' +
+    '<path d="M29 98 Q60 101 91 98" stroke="#12347a" stroke-width="3" fill="none"/>' +
+    '<path d="M38 34 C40 50 39 70 41 96 M82 34 C80 52 81 74 79 96" stroke="#b58a00" stroke-opacity=".35" stroke-width="2" fill="none"/>' +
+    '<text x="60" y="74" text-anchor="middle" font-family="Archivo,Arial,sans-serif" font-weight="900" font-size="42" fill="#12347a">9</text>' +
+    '</svg>';
+
+  addEventListener("DOMContentLoaded", function(){
+    ["quote", "tweet"].forEach(function(id){
+      var s = document.getElementById(id);
+      if (!s) return;
+      s.classList.add("has-lamp");
+      var l = document.createElement("div"); l.className = "lamp"; l.innerHTML = pylon; s.appendChild(l);
+    });
+    var ICONS = { reports: goal, "golden-boot": boot, transfers: shirt };
+    Object.keys(ICONS).forEach(function(id){
+      var s = document.getElementById(id);
+      if (!s) return;
+      s.classList.add("has-icon");
+      var d = document.createElement("div"); d.className = "sec-icon"; d.setAttribute("aria-hidden", "true"); d.innerHTML = ICONS[id]; s.appendChild(d);
+    });
+    dispatchEvent(new Event("resize"));
+  });
+})();
+</script>
+<script>
+// Yellow full stops: every sentence-ending full stop in near-white text is wrapped so it can take the floodlight yellow.
+// Full stops in the white match and fixture cards (dark text) are left alone.
+(function(){
+  var END = /\.(?=\s|$|["”’)\]])/;
+  function light(el){
+    var c = (getComputedStyle(el).color.match(/[\d.]+/g) || [0, 0, 0]).map(Number);
+    return (0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]) / 255 > 0.75;
+  }
+  function run(){
+    [].forEach.call(document.querySelectorAll("main > section, footer.site"), function(sec){
+      var walker = document.createTreeWalker(sec, NodeFilter.SHOW_TEXT, { acceptNode: function(n){
+        var p = n.parentElement;
+        if (!p || p.closest("script,style,svg,.sec-icon,.lamp,.fs")) return NodeFilter.FILTER_REJECT;
+        return END.test(n.nodeValue) && light(p) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }}), nodes = [], n;
+      while ((n = walker.nextNode())) nodes.push(n);
+      nodes.forEach(function(t){
+        var frag = document.createDocumentFragment();
+        t.nodeValue.split(/(\.(?=\s|$|["”’)\]]))/).forEach(function(part, i){
+          if (i % 2 === 1){ var s = document.createElement("span"); s.className = "fs"; s.textContent = "."; frag.appendChild(s); }
+          else if (part) frag.appendChild(document.createTextNode(part));
+        });
+        t.parentNode.replaceChild(frag, t);
+      });
+    });
+  }
+  if (document.readyState === "loading") addEventListener("DOMContentLoaded", run); else run();
+})();
+</script>
+<script>
+// Masthead: wrap the first word so phones can show it on its own smaller line, then let the ball re-measure.
+(function(){
+  var h1 = document.querySelector(".mast h1"), t = h1 && h1.firstChild;
+  if (!t || t.nodeType !== 3 || !/\S/.test(t.nodeValue)) return;
+  var m = t.nodeValue.match(/^(\s*)(\S+)(\s*)$/);
+  if (!m) return;
+  var b = document.createElement("b"); b.className = "mh1"; b.textContent = m[2];
+  h1.replaceChild(document.createTextNode(m[3] || " "), t);
+  h1.insertBefore(b, h1.firstChild);
+  dispatchEvent(new Event("resize"));
+})();
+</script>
